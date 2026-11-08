@@ -116,13 +116,15 @@ func ValidateTenantAccess(c *fiber.Ctx, resourceTenantID string) error {
 
 ## Testing strategy
 
-**43 test files** across the API, testing behavior rather than implementation:
+**55 test files** across the API, testing behavior rather than implementation:
 
 | Layer | Files | What's covered |
 |---|---|---|
 | `services` | 18 | Business rules, costing math, billing flows, auth roles, quote logic |
 | `handlers` | 17 | HTTP contracts, status codes, conflict handling, privacy endpoints |
 | `middleware` | 8 | Auth, cookies, CORS, rate limiting, tenant isolation, trial expiry |
+| `repository` | 5 | Query semantics, tenant scoping |
+| `config` | 1 | Configuration loading and validation |
 
 Two conventions that paid off:
 
@@ -153,7 +155,7 @@ Naming the *rule* in the test comment means a future reader knows what breaking 
 |---|---|
 | Go source files | ~150 |
 | Total LOC (API + web + shared types) | ~62,000 |
-| Test files | 43 |
+| Test files (API) | 55 |
 | Backend dependencies | Fiber, GORM, pgx, go-redis, golang-jwt |
 
 ---
